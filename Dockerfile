@@ -1,17 +1,15 @@
-FROM node:latest
-
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+FROM node:latest as base
 
 WORKDIR /home/node/app
 
 COPY package*.json ./
 
-USER node
+RUN npm i
 
-RUN npm install
+COPY . .
 
-COPY --chown=node:node . .
+FROM base as production
 
-EXPOSE 8080
+ENV NODE_PATH=./build
 
-CMD [ "node", "/src/main.tsx" ]
+RUN npm run build
