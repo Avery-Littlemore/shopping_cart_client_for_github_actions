@@ -35,7 +35,7 @@ jobs:
     - name: Build and push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
-        image: averylittlemore/catnip
+        image: averylittlemore/catni
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
